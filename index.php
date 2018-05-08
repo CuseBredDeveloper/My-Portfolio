@@ -1,3 +1,43 @@
+<?php
+  if (isset($_POST["submit"])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $subject = 'Message from Contact Demo ';
+ 
+    
+    
+    $body = "From: $name\n E-Mail: $email\n Message:\n $message";
+ 
+    // Check if name has been entered
+    if (!$_POST['name']) {
+      $errName = 'Please enter your name';
+    }
+    
+    // Check if email has been entered and is valid
+    if (!$_POST['email'] || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+      $errEmail = 'Please enter a valid email address';
+    }
+    
+    //Check if message has been entered
+    if (!$_POST['message']) {
+      $errMessage = 'Please enter your message';
+    }
+    //Check if simple anti-bot test is correct
+    if ($human !== 5) {
+      $errHuman = 'Your anti-spam is incorrect';
+    }
+ 
+// If there are no errors, send the email
+if (!$errName && !$errEmail && !$errMessage && !$errHuman) {
+  if (mail ($to, $subject, $body, $from)) {
+    $result='<div class="alert alert-success">Thank You! I will be in touch</div>';
+  } else {
+    $result='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
+  }
+}
+}
+?>
+<!-- Start of HTML WEB PAGE -->
 <!DOCTYPE html>
 <html>
 <title>Antoine Johnson - Welcome to My Page</title>
@@ -81,12 +121,7 @@ header {background-image: url("http://priceandpricecreative.com/wp-content/uploa
     <h2 class="w3-text-light-grey"><i class="fa fa-code" aria-hidden="true"></i>
       Behind the Code:</h2>
     <hr style="width:200px" class="w3-opacity">
-      <p>
-        <p>My name is Antoine Johnson and I am a Front-End Developer. After a successful career in engineering, project management and sales, 
-           I have redirected my career path into web development. In the days of Myspace, where college kids were inadvertently coding to customize their home pages, 
-           my passion for web development began! The more I have learned the more I became extremely intrigued about coding. Over past few years I dove deeply into coding 
-           and I have spend time learning through different coding boot camps, self teaching, and mentored learning. I am an active member on 
-           <a href="https://github.com/CuseBredDeveloper" id="webname">Github</a>, <a href="https://stackoverflow.com/story/cusebreddev81" id="webname">Stack Overflow</a>, & <a href="https://bitbucket.org/CuseBredDev81/" id="webname">#Slack</a>.
+      <p><p>Hello, my name is Antoine Johnson and I am a freelance front end developer. After a successful career in engineering, project management and sales, I have redirected my career path into web development. In the days of Myspace, where college kids were inadvertently coding to customize their home pages, my passion for web development began! The more I have learned the more I became extremely intrigued about coding. Over the last year I dove deeply into coding and I have spend time learning through different coding boot camps, self teaching, and mentored learning. I am currently an active member of <a href="https://github.com/CuseBredDeveloper" id="webname">Github</a>, <a href="https://stackoverflow.com/story/cusebreddev81" id="webname">Stack Overflow</a>, & <a href="https://bitbucket.org/CuseBredDev81/" id="webname">Bitbucket</a>.
 
         <p>My strengths are:</p> <p>
             <ul>
@@ -100,9 +135,7 @@ header {background-image: url("http://priceandpricecreative.com/wp-content/uploa
       
       <p>I am looking to push my skills further into a developer role and look forward to the challenges that will arrive in the future! 
       </p>
-      <p>Outside of </>coding, my time is spent with my family and coaching 7th grade youth basketball. Married for 9 years (together for 18 years), 
-         we have 4 beautiful children. We relocated to Charlotte, North Carolina in 2013 by 
-         way of Syracuse, New York and have enjoyed every bit of life here.Thank you for taking the time to read about me!  
+      <p>Outside of </>coding, my time is spent with my family and coaching 7th grade youth basketball. Married for 9 years (together for 18 years), we have 4 beautiful children. We relocated to Charlotte, North Carolina in 2013 by way of Syracuse, New York and have enjoyed every bit of life here.Thank you for taking the time to read about me!  
       </p>
       
     <h3 class="w3-padding-16 w3-text-light-grey">My Skills and Qualifications:</h3>
@@ -119,27 +152,27 @@ header {background-image: url("http://priceandpricecreative.com/wp-content/uploa
           
           <p class="w3-wide">Photoshop</p>
             <div class="w3-blue">
-              <div class="w3-dark-grey" style="height:28px;width:80%"></div>
+              <div class="w3-dark-grey" style="height:28px;width:65%"></div>
             </div>
          
           <p class="w3-wide">HTML5</p>
             <div class="w3-blue">
-              <div class="w3-dark-grey" style="height:28px;width:80%"></div>
+              <div class="w3-dark-grey" style="height:28px;width:85%"></div>
             </div>
          
           <p class="w3-wide">CSS</p>
             <div class="w3-blue">
-              <div class="w3-dark-grey" style="height:28px;width:70%"></div>
+              <div class="w3-dark-grey" style="height:28px;width:85%"></div>
             </div>
          
           <p class="w3-wide">Javascript</p>
             <div class="w3-blue">
-              <div class="w3-dark-grey" style="height:28px;width:70%"></div>
+              <div class="w3-dark-grey" style="height:28px;width:85%"></div>
             </div>
          
           <p class="w3-wide">Bootstrap</p>
             <div class="w3-blue">
-              <div class="w3-dark-grey" style="height:28px;width:65%"></div>
+              <div class="w3-dark-grey" style="height:28px;width:75%"></div>
             </div>
           
           <h3 class="w3-padding-16 w3-text-light-grey">Software Used:</h3>
@@ -184,7 +217,7 @@ header {background-image: url("http://priceandpricecreative.com/wp-content/uploa
             Projects Done
           </div>
           <div class="w3-quarter w3-section">
-            <span class="w3-xlarge">01</span><br>
+            <span class="w3-xlarge">--</span><br>
             Happy Clients
           </div>
           <div class="w3-quarter w3-section">
@@ -233,20 +266,16 @@ header {background-image: url("http://priceandpricecreative.com/wp-content/uploa
 <!-- End Grid/Pricing tables -->
     </div>
     
-<!-- Resume -->
-      
-    <h3 class="w3-padding-24 w3-text-light-grey" id="resume">My Resume</h3>  
-          <hr style="width:200px" class="w3-opacity">
-
+    <!-- Resume -->
 <!-- Freelance Web Developer -->
-          
-<div class="w3-container">
-            <h5 class="w3-text-white"><b>Freelance Front End Developer / Charlotte, NC</b></h5>
+      <h3 class="w3-padding-24 w3-text-light-grey" id="resume">My Resume</h3>  
+          <hr style="width:200px" class="w3-opacity">
+      <div class="w3-container">
+            <h5 class="w3-opacity"><b>Freelance Front End Developer / Charlotte, NC</b></h5>
             <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>
             <span class="w3-tag w3-grey w3-round">June 2017 - Present</span></h6>
             <p>
               <ul>
-            <li>Working with Code for Charlotte on a holiday christmas project application for the Charlotte Metro Police Department.(Target completion Christmas 2018)</li>    
             <li>Offering web services and bidding on web development services through www.upwork.com</li>
             <li>Developing online resume web pages for Clients</li>
             <li>Completed developer training through codeacademy.com, skillscrush.com and udemy.com.</li>
@@ -254,30 +283,11 @@ header {background-image: url("http://priceandpricecreative.com/wp-content/uploa
             </p>
             <hr>
           </div>
-
-<!-- Commercial Credit Group --> 
-
-      <div class="w3-container">
-            <h5 class="w3-text-white">
-            <b>Collections Specialist / Commercial Credit Group / Charlotte, NC</b></h5>
-            <h6 class="w3-text-blue">
-              <i class="fa fa-calendar fa-fw w3-margin-right"></i>
-              <span class="w3-tag w3-grey w3-round">Nov 2017 - Present</span>
-            </h6>
-            <p>
-              <ul>
-                <li>Update and maintain asset reports.</li>
-                <li>Assign and follow up with Vendors on pending collateral sales.</li>
-                <li>Recognized for properly maintaining delinquency ratio within target ranges.</li>
-                <li>Reconciliation of transactions and balances to maintain accurate accounts.</li>
-                  <li>Daily contact with manufacturing customers and vendors regarding status of accounts.</li>
-            </p>
-            <hr>
-          </div>
+       
 <!-- Okuma America Corporation  -->
         
         <div class="w3-container">
-          <h5 class="w3-text-white"><b>Regional Sales Engineer / Okuma America Corporation / Charlotte, NC</b></h5>
+          <h5 class="w3-opacity"><b>Regional Sales Engineer / Okuma America Corporation / Charlotte, NC</b></h5>
           <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i><span class="w3-tag w3-grey w3-round"></i>Nov 2015 - Jun 2017</span></h6>
             <p>
               <ul>
@@ -295,7 +305,7 @@ header {background-image: url("http://priceandpricecreative.com/wp-content/uploa
 <!-- Haeger Incorporated -->
         
         <div class="w3-container">
-          <h5 class="w3-text-white"><b>Regional Sales and Service Engineer / Haeger Incorporated / Charlotte, NC</b></h5>
+          <h5 class="w3-opacity"><b>Regional Sales and Service Engineer / Haeger Incorporated / Charlotte, NC</b></h5>
           <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i><span class="w3-tag w3-grey w3-round"></i>Mar 2014 - Nov 2015</span></h6>
             <p>
               <ul>
@@ -313,7 +323,7 @@ header {background-image: url("http://priceandpricecreative.com/wp-content/uploa
 <!-- NYMAT Machine Tool Corporation -->
 
         <div class="w3-container">
-          <h5 class="w3-text-white"><b>Sales Engineer / NYMAT Machine Tool / Syracuse, NY</b></h5>
+          <h5 class="w3-opacity"><b>Sales Engineer / NYMAT Machine Tool / Syracuse, NY</b></h5>
           <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i><span class="w3-tag w3-grey w3-round"></i>Aug 2013 - Mar 2014</span></h6>
             <p>
               <ul>
@@ -327,45 +337,34 @@ header {background-image: url("http://priceandpricecreative.com/wp-content/uploa
             </p>
           <hr>
         </div>
-<!-- Adept Machine Tool -->
 
         <div class="w3-container">
-          <h5 class="w3-text-white">
-            <b>Sales Engieer / Adept Machine Tool / Syracuse, NY</b>
-          </h5>
-          <h6 class="w3-text-blue">
-            <i class="fa fa-calendar fa-fw w3-margin-right"></i>
-            <span class="w3-tag w3-grey w3-round">
-              </i>Aug 2013 - Mar 2014</span>
-          </h6>
-          <p>
-            <ul>
-              <li>Represented the company and its partners (including but not limited to) Citizen, Miyano, Toyoda, Hyundai WIA and our machines
-              and accessory partners.</li>
-              <li>Successful territory management.</li>
-              <li>Support of marketing efforts by providing client insight to develop outbound marketing communications.</li>
-              <li>Analyzed machine tool market trends and developed key target initiatives to boost market share for my defined region.</li>
-            </ul>
-          </p>
+          <h5 class="w3-opacity"><b>Aflac Insurance / Adept Machine Tool / Syracuse, NY</b></h5>
+          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i><span class="w3-tag w3-grey w3-round"></i>Sept 2009 - Mar 2010</span></h6>
+            <p>
+              <ul>
+                <li>• Responsibilities included providing families and small businesses with supplemental insurance.</li>
+                <li>Held licenses in Accidental, Life, Property, Casualty, Accident and Sickness Insurance.</li>
+              </ul>
+            </p>
           <hr>
         </div>
-<!-- GA Braun -->        
 
         <div class="w3-container">
-          <h5 class="w3-text-white"><b>Sales Support Specialist/Design Engineer/Project Manager / G.A. Braun / Syracuse, NY</b></h5>
+          <h5 class="w3-opacity"><b>Sales Support Specialist/Design Engineer/Project Manager / G.A. Braun / Syracuse, NY</b></h5>
           <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i><span class="w3-tag w3-grey w3-round"></i>Jul 2005 - Aug 2009</span></h6>
             <p>
               <ul>
                 <li>Responsible for the successful initiation, planning, design, execution, monitoring, controlling and closure of Cruise Line capital projects.</li>
                 <li>Generation of bid binders and project scope of work per RFP process.</li>
-                <li>Responsible for the improvement and implementation of business practices within the Engineering department through the development of ISO work instruction.</li>
+                <li>• Responsible for the improvement and implementation of business practices within the Engineering department through the development of ISO work instruction.</li>
                 <li>Developed layout design concepts and solutions for potential customers’ laundry facilities, both new and re-tooling projects utilizing AutoCAD to support sales.</li>
                 <li>Granted 3 promotions during my tenure.</li>
                 <li>CAD file creation and management of company’s CAD drawings.</li>
               </ul>
             </p>
             <hr>
-    <a href="Antoine T. Johnson Resume.docx" download = "Antoine T. Johnson Resume.docx"><button class="w3-button w3-light-grey w3-padding-large w3-section "><i class="fa fa-download"></i> Download Resume
+    <a href="AntoineResume.docx" download = "AntoineResume.docx"><button class="w3-button w3-light-grey w3-padding-large w3-section "><i class="fa fa-download"></i> Download Resume
     </button></a>
         </div>
   </div>
@@ -447,20 +446,15 @@ header {background-image: url("http://priceandpricecreative.com/wp-content/uploa
     </div><br>
     <p>Lets get in touch. Send me a message:</p>
 
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" placeholder="" ="Name">
-      </input></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Email" placeholder="" ="Email">
-      </input></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Subject" placeholder="" ="Subject">
-      </input></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" placeholder="Message">
-      </input></p>
-      
-    <!-- <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea> -->
+  <?=$thankYou ?>  
 
+    <form method="post" action="contact.php";?>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Email" required name="Email"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Subject" required name="Subject"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="Message"></p>
       <p>
-        <button class="w3-button w3-light-grey w3-padding-large" type="submit">
+        <button class="w3-button w3-light-grey w3-padding-large" type="submit" maxlength="250">
           <i class="fa fa-paper-plane"></i> SEND MESSAGE
         </button>
       </p>
